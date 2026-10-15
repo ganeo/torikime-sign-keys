@@ -1,0 +1,13 @@
+{
+  "_comment": "見本の PDF を確かめるためだけの、テスト用の鍵。本物の契約には使っていない",
+  "keys": [
+    {
+      "key_id": "example",
+      "algorithm": "Ed25519",
+      "public_key": "4vx01gvTQ3hWEiphcztS8hdLk9fG_LY16QXPdF16-F8",
+      "valid_from": "2026-01-01T00:00:00.000Z",
+      "valid_until": null,
+      "status": "active"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # 毎月1日に、新しい Node.js でもスクリプトが動くかを確かめる
+    - cron: "0 0 1 * *"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: 見本の PDF を確かめられる
+        run: node verify.mjs example/example.pdf example/example-keys.json
+      - name: 見本の PDF は、本物の一覧の鍵では確かめられない(テスト用の鍵が本物の一覧に入っていない)
+        run: "! node verify.mjs example/example.pdf public-keys.json"
+      - name: 公開鍵の一覧の形
+        run: node -e 'const l=require("./public-keys.json"); if(!Array.isArray(l.keys)) process.exit(1); for (const k of l.keys) { if(k.algorithm!=="Ed25519"||!/^[A-Za-z0-9_-]{43}$/.test(k.public_key)||["local","test","example"].includes(k.key_id)) { console.error("bad key", k.key_id); process.exit(1) } }'
