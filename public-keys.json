@@ -1,1 +1,12 @@
-{ "keys": [] }
+{
+  "keys": [
+    {
+      "key_id": "2026",
+      "algorithm": "Ed25519",
+      "public_key": "YNWF7IKoOAxjtek1pdBS258j_-xL37iUcbS44tNCh0o",
+      "valid_from": "2026-10-18T13:33:30.000Z",
+      "valid_until": null,
+      "status": "active"
+    }
+  ]
+}
